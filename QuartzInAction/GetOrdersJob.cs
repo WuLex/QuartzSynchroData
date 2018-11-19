@@ -42,24 +42,15 @@ namespace QuartzInAction
                     string conStr = string.Empty;
                     if (!string.IsNullOrEmpty(serverFlag) && serverFlag.Equals("1"))
                     {
-                        conStr =
-                            string.Format(
-                                "Data Source=XXXXX;Initial Catalog={0};Persist Security Info=True;User ID=db1;Password=11111;",
-                                dbName);
+                        conStr =string.Format("Data Source=XXXXX;Initial Catalog={0};Persist Security Info=True;User ID=db1;Password=11111;",dbName);
                     }
                     else if (!string.IsNullOrEmpty(serverFlag) && serverFlag.Equals("2"))
                     {
-                        conStr =
-                            string.Format(
-                                "Data Source=XXXXX,3433;Initial Catalog={0};Persist Security Info=True;User ID=db2;Password=11111;",
-                                dbName);
+                        conStr =string.Format("Data Source=XXXXX,3433;Initial Catalog={0};Persist Security Info=True;User ID=db2;Password=11111;",dbName);
                     }
                     else
                     {
-                        conStr =
-                            string.Format(
-                                "server=.;User ID=sa;Password=1111111;database={0};Connection Reset=true;Pooling=False;",
-                                dbName);
+                        conStr =string.Format("server=.;User ID=sa;Password=1111111;database={0};Connection Reset=true;Pooling=False;",dbName);
                     }
                     //根据dbNum删除本地对应的订单
                     //根据conStr，GetOrderdt,获取对应数据库,范围时间内的订单表，录入本地数据库
@@ -67,15 +58,13 @@ namespace QuartzInAction
                     {
                         #region 订单批处理
 
-                        string ordersql =
-                            string.Format(" dbNum={0} and DATEDIFF(day,OrdersDt,getDate()) < {1} ", dbNum,
-                                GetOrderdt);
+                        string ordersql = string.Format(" dbNum={0} and DATEDIFF(day,OrdersDt,getDate()) < {1} ", dbNum, GetOrderdt);
                         bool flag = new OrderDAL().DeleteEntity(ordersql, allOrderConStr); //删除数据中心这一批的订单
                         if (flag)
                         {
                             ordersql = string.Format(" DATEDIFF(day,OrdersDt,getDate()) < {0} ", GetOrderdt);
                             IList<OrderModel> orderList = new OrderDAL().GetEntities(ordersql, conStr);
-                                //获取各服务器相同条件下的一批订单，因为订单数据(如 订单状态，收货人电话)是不断变化，只能不断轮询拉取，更新到数据中心
+                            //获取各服务器相同条件下的一批订单，因为订单数据(如 订单状态，收货人电话)是不断变化，只能不断轮询拉取，更新到数据中心
                             Loger.WriteFile(conStr + "-----订单数:" + orderList.Count);
                             for (int i = 0; i < orderList.Count; i++)
                             {
@@ -138,7 +127,7 @@ namespace QuartzInAction
                                         string.Format("select * from ExpressStatus where nu='{0}' order by id  ",
                                             courierNum);
                                     DataTable ExpressStatusDt = SqlServerHelper.ExecuteDt(getStatusSql, conStr);
-                                    ExpressStatusDt.Columns.Add("dbNum", typeof (string));
+                                    ExpressStatusDt.Columns.Add("dbNum", typeof(string));
                                     foreach (DataRow dr in ExpressStatusDt.Rows)
                                     {
                                         dr["dbNum"] = dbNum;
@@ -176,7 +165,7 @@ namespace QuartzInAction
                                             "select *  from [LData] where DId = (select max(Id) as Id from ExpressStatus where Nu ='{0}' ) order by LDTime desc ",
                                             courierNum);
                                     DataTable LDataDt = SqlServerHelper.ExecuteDt(getInfoSql, conStr);
-                                    LDataDt.Columns.Add("dbNum", typeof (string));
+                                    LDataDt.Columns.Add("dbNum", typeof(string));
                                     foreach (DataRow dr in LDataDt.Rows)
                                     {
                                         dr["dbNum"] = dbNum;
