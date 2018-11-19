@@ -92,7 +92,7 @@ namespace QuartzInAction.SqlServerDAL
                     ParameterName = "@Context",
                     SqlDbType = SqlDbType.NVarChar,
                     Size = 2000,
-                    Value = (entity.Context != null ? entity.Context : string.Empty)
+                    Value = (entity.Context ?? string.Empty)
                 },
                 new SqlParameter()
                 {
@@ -106,28 +106,28 @@ namespace QuartzInAction.SqlServerDAL
                     ParameterName = "@LDFTime",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 100,
-                    Value = (entity.LDFTime != null ? entity.LDFTime : string.Empty)
+                    Value = (entity.LDFTime ?? string.Empty)
                 },
                 new SqlParameter()
                 {
                     ParameterName = "@Status",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 50,
-                    Value = (entity.Status != null ? entity.Status : string.Empty)
+                    Value = (entity.Status ?? string.Empty)
                 },
                 new SqlParameter()
                 {
                     ParameterName = "@AreaCode",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 50,
-                    Value = (entity.AreaCode != null ? entity.AreaCode : string.Empty)
+                    Value = (entity.AreaCode ?? string.Empty)
                 },
                 new SqlParameter()
                 {
                     ParameterName = "@AreaName",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 500,
-                    Value = (entity.AreaName != null ? entity.AreaName : string.Empty)
+                    Value = (entity.AreaName ?? string.Empty)
                 }
             };
             try

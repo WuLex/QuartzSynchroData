@@ -69,7 +69,9 @@
     <Compile Include="Common\QueryParam.cs" />
     <Compile Include="Common\Utils.cs" />
     <Compile Include="DAL\ExpressStatusDAL.cs" />
-    <Compile Include="DAL\LogisticsDAL.cs" />
+    <Compile Include="DAL\LogisticsDAL.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="DAL\OrderDAL.cs" />
     <Compile Include="DAL\DBConfigDAL.cs" />
     <Compile Include="DBUtility\SqlServerHelper.cs" />
