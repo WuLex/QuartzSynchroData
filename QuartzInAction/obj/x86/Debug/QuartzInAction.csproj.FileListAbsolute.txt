@@ -21,3 +21,15 @@ C:\Users\Administrator\Desktop\QuartzSynchroData\QuartzInAction\bin\Debug\Common
 C:\Users\Administrator\Desktop\QuartzSynchroData\QuartzInAction\bin\Debug\Quartz.dll
 C:\Users\Administrator\Desktop\QuartzSynchroData\QuartzInAction\obj\x86\Debug\QuartzInAction.ProjectInstaller.resources
 C:\Users\Administrator\Desktop\QuartzSynchroData\QuartzInAction\obj\x86\Debug\QuartzInAction.csproj.GenerateResource.Cache
+E:\GitProject\QuartzSynchroData\QuartzInAction\bin\Debug\QuartzInAction.exe.config
+E:\GitProject\QuartzSynchroData\QuartzInAction\obj\x86\Debug\QuartzInAction.exe
+E:\GitProject\QuartzSynchroData\QuartzInAction\obj\x86\Debug\QuartzInAction.pdb
+E:\GitProject\QuartzSynchroData\QuartzInAction\bin\Debug\QuartzInAction.exe
+E:\GitProject\QuartzSynchroData\QuartzInAction\bin\Debug\QuartzInAction.pdb
+E:\GitProject\QuartzSynchroData\QuartzInAction\bin\Debug\C5.dll
+E:\GitProject\QuartzSynchroData\QuartzInAction\bin\Debug\Common.Logging.Core.dll
+E:\GitProject\QuartzSynchroData\QuartzInAction\bin\Debug\Common.Logging.dll
+E:\GitProject\QuartzSynchroData\QuartzInAction\bin\Debug\Quartz.dll
+E:\GitProject\QuartzSynchroData\QuartzInAction\obj\x86\Debug\QuartzInAction.csprojResolveAssemblyReference.cache
+E:\GitProject\QuartzSynchroData\QuartzInAction\obj\x86\Debug\QuartzInAction.ProjectInstaller.resources
+E:\GitProject\QuartzSynchroData\QuartzInAction\obj\x86\Debug\QuartzInAction.csproj.GenerateResource.Cache
