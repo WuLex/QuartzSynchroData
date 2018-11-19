@@ -14,10 +14,10 @@ namespace QuartzInAction
         static void Main()
         {
             ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-			{ 
-				new GetDataService() 
-			};
+            ServicesToRun = new ServiceBase[]
+            {
+                new GetDataService()
+            };
             ServiceBase.Run(ServicesToRun);
         }
     }

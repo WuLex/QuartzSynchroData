@@ -10,13 +10,13 @@ namespace QuartzInAction.Common
     /// </summary>
     public class QueryParam
     {
-
         /// <summary>
         /// 构造函数
         /// </summary>
         public QueryParam()
             : this(1, int.MaxValue)
-        { }
+        {
+        }
 
         /// <summary>
         /// 构造函数
@@ -77,7 +77,6 @@ namespace QuartzInAction.Common
         }
 
 
-
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -101,9 +100,8 @@ namespace QuartzInAction.Common
             _PageSize = _mPageSize;
         }
 
-
-
         #region "Private Variables"
+
         private string _TableName;
         private string _ReturnFields;
         private string _Where;
@@ -111,6 +109,7 @@ namespace QuartzInAction.Common
         private int _OrderType = 1;
         private int _PageIndex = 1;
         private int _PageSize = int.MaxValue;
+
         #endregion
 
         #region "Public Variables"
@@ -120,17 +119,9 @@ namespace QuartzInAction.Common
         /// </summary>
         public string TableName
         {
-            get
-            {
-                return _TableName;
-            }
-            set
-            {
-                _TableName = value;
-            }
-
+            get { return _TableName; }
+            set { _TableName = value; }
         }
-
 
 
         /// <summary>
@@ -138,17 +129,9 @@ namespace QuartzInAction.Common
         /// </summary>
         public string ReturnFields
         {
-            get
-            {
-                return _ReturnFields;
-            }
-            set
-            {
-                _ReturnFields = value;
-            }
+            get { return _ReturnFields; }
+            set { _ReturnFields = value; }
         }
-
-
 
 
         /// <summary>
@@ -156,18 +139,9 @@ namespace QuartzInAction.Common
         /// </summary>
         public string Where
         {
-            get
-            {
-                return _Where;
-            }
-            set
-            {
-                _Where = value;
-            }
+            get { return _Where; }
+            set { _Where = value; }
         }
-
-
-
 
 
         /// <summary>
@@ -175,14 +149,8 @@ namespace QuartzInAction.Common
         /// </summary>
         public string Orderfld
         {
-            get
-            {
-                return _Orderfld;
-            }
-            set
-            {
-                _Orderfld = value;
-            }
+            get { return _Orderfld; }
+            set { _Orderfld = value; }
         }
 
 
@@ -191,14 +159,8 @@ namespace QuartzInAction.Common
         /// </summary>
         public int OrderType
         {
-            get
-            {
-                return _OrderType;
-            }
-            set
-            {
-                _OrderType = value;
-            }
+            get { return _OrderType; }
+            set { _OrderType = value; }
         }
 
 
@@ -207,15 +169,8 @@ namespace QuartzInAction.Common
         /// </summary>
         public int PageIndex
         {
-            get
-            {
-                return _PageIndex;
-            }
-            set
-            {
-                _PageIndex = value;
-            }
-
+            get { return _PageIndex; }
+            set { _PageIndex = value; }
         }
 
 
@@ -224,15 +179,10 @@ namespace QuartzInAction.Common
         /// </summary>
         public int PageSize
         {
-            get
-            {
-                return _PageSize;
-            }
-            set
-            {
-                _PageSize = value;
-            }
+            get { return _PageSize; }
+            set { _PageSize = value; }
         }
+
         #endregion
     }
 }

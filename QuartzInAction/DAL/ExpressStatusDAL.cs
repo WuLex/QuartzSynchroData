@@ -1,16 +1,17 @@
-﻿
-using System;
+﻿using System;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using QuartzInAction.Model;
 using QuartzInAction.DBUtility;
+
 namespace QuartzInAction.SqlServerDAL
 {
     public class ExpressStatusDAL
-	{
-        protected QuartzInAction.Model.ExpressStatusModel Populate_Orders(IDataReader reader, Dictionary<string, string> fileds, string _conStr)
+    {
+        protected QuartzInAction.Model.ExpressStatusModel Populate_Orders(IDataReader reader,
+            Dictionary<string, string> fileds, string _conStr)
         {
             QuartzInAction.Model.ExpressStatusModel model = new QuartzInAction.Model.ExpressStatusModel();
 
@@ -23,27 +24,37 @@ namespace QuartzInAction.SqlServerDAL
             }
 
             if (fileds.ContainsKey("Status") && !Convert.IsDBNull(reader["Status"]))
-                model.Status = !string.IsNullOrEmpty(reader["Status"].ToString()) ? reader["Status"].ToString().Trim() : string.Empty;
+                model.Status = !string.IsNullOrEmpty(reader["Status"].ToString())
+                    ? reader["Status"].ToString().Trim()
+                    : string.Empty;
 
             if (fileds.ContainsKey("OMessage") && !Convert.IsDBNull(reader["OMessage"]))
-                model.OMessage = !string.IsNullOrEmpty(reader["OMessage"].ToString()) ? reader["OMessage"].ToString().Trim() : string.Empty;
+                model.OMessage = !string.IsNullOrEmpty(reader["OMessage"].ToString())
+                    ? reader["OMessage"].ToString().Trim()
+                    : string.Empty;
 
             if (fileds.ContainsKey("State") && !Convert.IsDBNull(reader["State"]))
-                model.State = !string.IsNullOrEmpty(reader["State"].ToString()) ? reader["State"].ToString().Trim() : string.Empty;
-           
+                model.State = !string.IsNullOrEmpty(reader["State"].ToString())
+                    ? reader["State"].ToString().Trim()
+                    : string.Empty;
+
             if (fileds.ContainsKey("Ischeck") && !Convert.IsDBNull(reader["Ischeck"]))
-                model.Ischeck = !string.IsNullOrEmpty(reader["Ischeck"].ToString()) ? reader["Ischeck"].ToString().Trim() : string.Empty;
+                model.Ischeck = !string.IsNullOrEmpty(reader["Ischeck"].ToString())
+                    ? reader["Ischeck"].ToString().Trim()
+                    : string.Empty;
 
             if (fileds.ContainsKey("Nu") && !Convert.IsDBNull(reader["Nu"]))
-                model.Nu = !string.IsNullOrEmpty(reader["Nu"].ToString()) ? reader["Nu"].ToString().Trim() : string.Empty;
+                model.Nu = !string.IsNullOrEmpty(reader["Nu"].ToString())
+                    ? reader["Nu"].ToString().Trim()
+                    : string.Empty;
 
             return model;
         }
 
         public IList<ExpressStatusModel> GetEntities(string sqlwhere, string _conStr)
         {
-
-            SqlServerHelper.PopulateDelegate<ExpressStatusModel> entities = new SqlServerHelper.PopulateDelegate<ExpressStatusModel>(this.Populate_Orders);
+            SqlServerHelper.PopulateDelegate<ExpressStatusModel> entities =
+                new SqlServerHelper.PopulateDelegate<ExpressStatusModel>(this.Populate_Orders);
             string sql = string.Format("select * from ExpressStatus ");
             if (sqlwhere.Trim() != "")
             {
@@ -51,7 +62,6 @@ namespace QuartzInAction.SqlServerDAL
             }
 
             return SqlServerHelper.GetEntities<ExpressStatusModel>(entities, sql, _conStr);
-
         }
 
 
@@ -65,17 +75,15 @@ namespace QuartzInAction.SqlServerDAL
             bool b = false;
             try
             {
-                SqlServerHelper.ExecuteNonQuery(String.Format(" DELETE  ExpressStatus  WHERE {0}", sqlWhere), null, _conStr);
+                SqlServerHelper.ExecuteNonQuery(String.Format(" DELETE  ExpressStatus  WHERE {0}", sqlWhere), null,
+                    _conStr);
                 b = true;
             }
             catch (Exception ex)
             {
-
                 Common.Loger.WriteFile("DeleteEntity", ex.ToString());
             }
             return b;
         }
-
-	}
+    }
 }
-

@@ -18,7 +18,7 @@ namespace QuartzInAction.Common
         /// <param name="Path">文件路径，如果没有该文件，刚创建</param>
         /// <param name="type">日志类型</param>
         /// <param name="content">日志内容</param>
-        public static void WriteFile(string type,string content)
+        public static void WriteFile(string type, string content)
         {
             string Path = AppDomain.CurrentDomain.BaseDirectory + "Log";
             if (!Directory.Exists(Path))
@@ -26,7 +26,7 @@ namespace QuartzInAction.Common
                 //若文件目录不存在 则创建
                 Directory.CreateDirectory(Path);
             }
-            Path += "\\" + DateTime.Now.ToString("yyMMdd") + type+ ".log";
+            Path += "\\" + DateTime.Now.ToString("yyMMdd") + type + ".log";
             if (!File.Exists(Path))
             {
                 File.Create(Path).Close();

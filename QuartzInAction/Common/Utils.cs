@@ -7,6 +7,7 @@ namespace QuartzInAction.Common
     public class Utils
     {
         #region 获取时间戳
+
         /// <summary>
         /// 获取时间戳
         /// </summary>
@@ -32,10 +33,12 @@ namespace QuartzInAction.Common
                 ret = Convert.ToInt64(ts.TotalMilliseconds).ToString();
 
             return ret;
-        }  
+        }
+
         #endregion
 
         #region 返回json格式数据
+
         /// <summary>
         /// 返回json格式数据
         /// </summary>
@@ -52,7 +55,7 @@ namespace QuartzInAction.Common
                 //如果不单独判断，返回的形式是 {"d": True } 或 {"d": False }, js会报转换错误
                 else if (o is bool)
                 {
-                    bool b = (bool)o;
+                    bool b = (bool) o;
                     if (b)
                         str = "{\"d\": true }";
                     else
@@ -63,9 +66,11 @@ namespace QuartzInAction.Common
             }
             return str;
         }
+
         #endregion
 
         #region 判断数据库字段赋值是否存在值
+
         /// <summary>
         /// 判断日期是否存在值
         /// </summary>
@@ -76,6 +81,7 @@ namespace QuartzInAction.Common
             else
                 return DBNull.Value;
         }
+
         /// <summary>
         /// 判断Int是否存在值
         /// </summary>
@@ -101,6 +107,7 @@ namespace QuartzInAction.Common
         #endregion
 
         #region 获取appSettings里的值
+
         /// <summary>
         /// 获取appSettings里的值
         /// </summary>
@@ -113,7 +120,7 @@ namespace QuartzInAction.Common
             else
                 return System.Configuration.ConfigurationManager.AppSettings[key].ToString();
         }
-        #endregion
 
+        #endregion
     }
 }

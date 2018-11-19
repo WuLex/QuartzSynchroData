@@ -18,7 +18,7 @@ namespace QuartzInAction.DBUtility
         /// <param name="dr">记录集</param>
         /// <param name="Fileds">字段名列表</param>
         /// <returns></returns>
-        public delegate T PopulateDelegate<T>(IDataReader dr, Dictionary<string, string> Fileds,string _conStr);
+        public delegate T PopulateDelegate<T>(IDataReader dr, Dictionary<string, string> Fileds, string _conStr);
 
         /// <summary>
         /// 返回IList
@@ -46,7 +46,8 @@ namespace QuartzInAction.DBUtility
             }
             catch (Exception ex)
             {
-                QuartzInAction.Common.Loger.WriteFile(" public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, string sql, string _conStr)出错！"+ex);
+                QuartzInAction.Common.Loger.WriteFile(
+                    " public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, string sql, string _conStr)出错！" + ex);
             }
             finally
             {
@@ -58,7 +59,8 @@ namespace QuartzInAction.DBUtility
             return lst;
         }
 
-        public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, string sql, string _conStr, params SqlParameter[] parameters)
+        public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, string sql, string _conStr,
+            params SqlParameter[] parameters)
         {
             IList<T> lst = new List<T>();
             SqlDataReader reader = null;
@@ -77,7 +79,9 @@ namespace QuartzInAction.DBUtility
             }
             catch (Exception ex)
             {
-                QuartzInAction.Common.Loger.WriteFile("public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, string sql, string _conStr, params SqlParameter[] parameters)出错！"+ ex);
+                QuartzInAction.Common.Loger.WriteFile(
+                    "public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, string sql, string _conStr, params SqlParameter[] parameters)出错！" +
+                    ex);
             }
             finally
             {
@@ -96,7 +100,8 @@ namespace QuartzInAction.DBUtility
         /// <param name="queryParam">查询字符串</param>
         /// <param name="count">返回记录总数</param>
         /// <returns>返回记录集List</returns>
-        public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, QuartzInAction.Common.QueryParam queryParam, string _conStr, out int count)
+        public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, QuartzInAction.Common.QueryParam queryParam,
+            string _conStr, out int count)
         {
             List<T> lst = new List<T>();
             count = 0;
@@ -148,7 +153,8 @@ namespace QuartzInAction.DBUtility
         /// <param name="i">重载标记字段，任意数值</param>
         /// <param name="count">返回记录总数</param>
         /// <returns>返回记录集List</returns>
-        public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, QuartzInAction.Common.QueryParam queryParam, int i, out int count, string _conStr)
+        public static IList<T> GetEntities<T>(PopulateDelegate<T> pd, QuartzInAction.Common.QueryParam queryParam, int i,
+            out int count, string _conStr)
         {
             IList<T> lst = new List<T>();
             count = 0;
@@ -159,7 +165,7 @@ namespace QuartzInAction.DBUtility
                 SqlDataReader dr = null;
                 cmd.Connection = Conn;
 
-                int TotalRecordForPageIndex = queryParam.PageIndex * queryParam.PageSize;
+                int TotalRecordForPageIndex = queryParam.PageIndex*queryParam.PageSize;
                 string OrderBy;
                 string CutOrderBy;
                 if (queryParam.OrderType == 1)
@@ -180,15 +186,18 @@ namespace QuartzInAction.DBUtility
                 cmd.Parameters.Clear();
 
                 int CurrentPageSize = queryParam.PageSize;
-                if ((count - 1) / queryParam.PageSize + 1 == queryParam.PageIndex)
+                if ((count - 1)/queryParam.PageSize + 1 == queryParam.PageIndex)
                 {
-                    CurrentPageSize = count % queryParam.PageSize;
+                    CurrentPageSize = count%queryParam.PageSize;
                     if (CurrentPageSize == 0)
                         CurrentPageSize = queryParam.PageSize;
                 }
                 //取记录值
                 //MYSQL : sb.AppendFormat("SELECT * FROM (SELECT * FROM (SELECT  {2}	FROM {3} {4} {5} LIMIT {1} ) TB2  {6}  LIMIT {0}) TB3 {5} ", CurrentPageSize, TotalRecordForPageIndex, queryParam.ReturnFields, queryParam.TableName, queryParam.Where, OrderBy, CutOrderBy);
-                sb.AppendFormat("SELECT * FROM (SELECT TOP {0} * FROM (SELECT TOP {1} {2}	FROM {3} {4} {5}) TB2	{6}) TB3 {5} ", CurrentPageSize, TotalRecordForPageIndex, queryParam.ReturnFields, queryParam.TableName, queryParam.Where, OrderBy, CutOrderBy);
+                sb.AppendFormat(
+                    "SELECT * FROM (SELECT TOP {0} * FROM (SELECT TOP {1} {2}	FROM {3} {4} {5}) TB2	{6}) TB3 {5} ",
+                    CurrentPageSize, TotalRecordForPageIndex, queryParam.ReturnFields, queryParam.TableName,
+                    queryParam.Where, OrderBy, CutOrderBy);
                 cmd.CommandText = sb.ToString();
                 dr = cmd.ExecuteReader();
 
@@ -215,7 +224,8 @@ namespace QuartzInAction.DBUtility
         /// 执行存储过程，并返回SqlDataReader对象
         /// </summary>
         /// <returns>返回SqlDataReader</returns>
-        public static SqlDataReader GetDataReaderbyStoredProcedure(SqlCommand cmd, SqlConnection con, string storedProcedursName, IList<SqlParameter> parameters, string _conStr)
+        public static SqlDataReader GetDataReaderbyStoredProcedure(SqlCommand cmd, SqlConnection con,
+            string storedProcedursName, IList<SqlParameter> parameters, string _conStr)
         {
             con.ConnectionString = _conStr;
             con.Open();
@@ -225,7 +235,6 @@ namespace QuartzInAction.DBUtility
 
             PrepareCommand(cmd, parameters);
             return cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
         }
 
 
@@ -233,7 +242,8 @@ namespace QuartzInAction.DBUtility
         /// 执行存储过程，并返回DataTable对象
         /// </summary>
         /// <returns>返回Table</returns>
-        public static DataTable GetDataTableByStoredProcedure(string storedProcedursName, SqlParameter[] parameters, string _conStr)
+        public static DataTable GetDataTableByStoredProcedure(string storedProcedursName, SqlParameter[] parameters,
+            string _conStr)
         {
             using (SqlConnection conn = new SqlConnection(_conStr))
             {
@@ -246,13 +256,13 @@ namespace QuartzInAction.DBUtility
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 DataTable dt = ds.Tables[0];
-                
+
                 cmd.Dispose();
                 conn.Close();
                 return dt;
             }
         }
-         
+
 
         /// <summary>
         /// 执行存储过程，并返回String对象
@@ -284,7 +294,8 @@ namespace QuartzInAction.DBUtility
         /// 执行存储过程，并返回String对象，dal_coupon.cs中使用到
         /// </summary>
         /// <returns>返回SqlDataReader</returns>
-        public static string ExecStoredProcedure(string storedProcedursName, string outputParameter, SqlParameter[] parameters, string _conStr)
+        public static string ExecStoredProcedure(string storedProcedursName, string outputParameter,
+            SqlParameter[] parameters, string _conStr)
         {
             using (SqlConnection conn = new SqlConnection(_conStr))
             {
@@ -302,7 +313,7 @@ namespace QuartzInAction.DBUtility
                 return result;
             }
         }
-        
+
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -331,13 +342,14 @@ namespace QuartzInAction.DBUtility
                     {
                         return null;
                     }
-                    finally 
+                    finally
                     {
                         connection.Close();
                     }
                 }
             }
         }
+
         /// <summary>
         /// 对连接执行 Transact-SQL 语句并返回受影响的行数。
         /// </summary>
@@ -353,6 +365,7 @@ namespace QuartzInAction.DBUtility
                 }
             }
         }
+
         /// <summary>
         /// 执行一条计算查询结果语句，返回查询结果（object）。
         /// </summary>
@@ -383,18 +396,19 @@ namespace QuartzInAction.DBUtility
                         QuartzInAction.Common.Loger.WriteFile(e.ToString());
                         return null;
                     }
-                    finally 
+                    finally
                     {
                         connection.Close();
                     }
                 }
             }
         }
+
         /// <summary>
         /// 执行SQL语句，并返回SqlDataReader对象
         /// </summary>
         /// <returns>返回SqlDataReader</returns>
-        public static SqlDataReader GetDataReader(String sql, IList<SqlParameter> parameters,string _conStr)
+        public static SqlDataReader GetDataReader(String sql, IList<SqlParameter> parameters, string _conStr)
         {
             SqlConnection con = new SqlConnection(_conStr);
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -408,7 +422,7 @@ namespace QuartzInAction.DBUtility
         /// </summary>
         /// <param name="sql">查询的SQL语句</param>
         /// <returns>返回的数据</returns>
-        public static DataSet ExecuteDataSet(string sql, SqlParameter[] parameters, CommandType commType,string _conStr)
+        public static DataSet ExecuteDataSet(string sql, SqlParameter[] parameters, CommandType commType, string _conStr)
         {
             using (SqlConnection con = new SqlConnection(_conStr))
             {
@@ -428,6 +442,7 @@ namespace QuartzInAction.DBUtility
                 return ds;
             }
         }
+
         /// <summary>
         /// 为SqlCommand准备执行语句
         /// </summary>
@@ -436,29 +451,32 @@ namespace QuartzInAction.DBUtility
         /// <param name="trans"></param>
         /// <param name="cmdText"></param>
         /// <param name="cmdParms"></param>
-        private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms)
+        private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText,
+            SqlParameter[] cmdParms)
         {
-            if (conn.State != ConnectionState.Open)     //如果数据库连接为关闭状态 
-                conn.Open();                            //打开数据库连接 
-            cmd.Connection = conn;                      //设置命令连接  
-            cmd.CommandText = cmdText;                  //设置执行命令的sql语句  
-            if (trans != null)                          //如果事务不为空  
-                cmd.Transaction = trans;                //设置执行命令的事务  
-            cmd.CommandType = CommandType.Text;         //设置解释sql语句的类型为“文本”类型（也是就说该函数不适用于存储过程）
-            if (cmdParms != null)                       //如果参数数组不为空
+            if (conn.State != ConnectionState.Open) //如果数据库连接为关闭状态 
+                conn.Open(); //打开数据库连接 
+            cmd.Connection = conn; //设置命令连接  
+            cmd.CommandText = cmdText; //设置执行命令的sql语句  
+            if (trans != null) //如果事务不为空  
+                cmd.Transaction = trans; //设置执行命令的事务  
+            cmd.CommandType = CommandType.Text; //设置解释sql语句的类型为“文本”类型（也是就说该函数不适用于存储过程）
+            if (cmdParms != null) //如果参数数组不为空
             {
                 //循环传入的参数数组 
                 foreach (SqlParameter parameter in cmdParms)
                 {
-                    if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &&
+                    if ((parameter.Direction == ParameterDirection.InputOutput ||
+                         parameter.Direction == ParameterDirection.Input) &&
                         (parameter.Value == null))
                     {
-                        parameter.Value = DBNull.Value;  //获取参数的值
+                        parameter.Value = DBNull.Value; //获取参数的值
                     }
-                    cmd.Parameters.Add(parameter);       //添加参数
+                    cmd.Parameters.Add(parameter); //添加参数
                 }
             }
         }
+
         /// <summary>
         /// 为SqlCommand准备执行语句
         /// </summary>
@@ -522,7 +540,6 @@ namespace QuartzInAction.DBUtility
                 da.Dispose();
                 return dt;
             }
-        }   
-
+        }
     }
 }
